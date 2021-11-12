@@ -1,4 +1,4 @@
-package tech.gusgol.secretsanta
+package tech.gusgol.secretsanta.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import tech.gusgol.secretsanta.ui.theme.SecretSantaTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +18,7 @@ class MainActivity : ComponentActivity() {
             SecretSantaTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    Greeting()
                 }
             }
         }
@@ -25,14 +26,15 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Greeting(viewModel: HomeViewModel = viewModel()) {
+    val list = viewModel.shuffle()
+    Text(text = list)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     SecretSantaTheme {
-        Greeting("Android")
+        Greeting()
     }
 }
